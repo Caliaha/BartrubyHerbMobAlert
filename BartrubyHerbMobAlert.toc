@@ -1,10 +1,11 @@
 ## Interface: 70000
 ## Title: BartrubyHerbMobAlert
-## Version: 1.0
+## Version: @project-version@
 ## Notes: Alerts when herb spawns mob
 ## Author: Bartruby of Cairne
 ## SavedVariables: BartrubyHerbMobAlertDB
 ## OptionalDeps: Ace3
+## X-Embeds: Ace3
 
 libs\LibStub\LibStub.lua
 libs\CallbackHandler-1.0\CallbackHandler-1.0.xml
