@@ -1,12 +1,12 @@
 BartrubyHerbMobAlert = LibStub("AceAddon-3.0"):NewAddon("BartrubyHerbMobAlert", "AceConsole-3.0", "AceEvent-3.0")
 
-local L = LibStub("AceLocale-3.0"):GetLocale("BartrubyHerbMobAlert")
 local LSM = LibStub("LibSharedMedia-3.0")
 LSM:Register("sound", "HerbAlert", [[Interface\Addons\BartrubyHerbMobAlert\alert.ogg]])
 
 local HERBMOBS = { }
-HERBMOBS[L["Withered Hungerer"]] = true
-HERBMOBS[L["Nightmare Creeper"]] = true
+HERBMOBS["98232"] = true -- Withered Hungerer (Azsuna)
+HERBMOBS["98233"] = true -- Withered Hungerer (Suramar)
+HERBMOBS["98234"] = true -- Nightmare Creeper (Val'sharah)
 
 function BartrubyHerbMobAlert:OnInitialize()
  local defaults = {
@@ -32,17 +32,11 @@ function BartrubyHerbMobAlert:OnDisable()
  self:UnregisterAllEvents()
 end
 
-function BartrubyHerbMobAlert:NAME_PLATE_UNIT_ADDED(event, name)
- self:ProcessMob(UnitName(name), event)
-end
+function BartrubyHerbMobAlert:NAME_PLATE_UNIT_ADDED(event, unit)
+ local _, _, _, _, _, npc_id, _ = strsplit("-", UnitGUID(unit))
 
-function BartrubyHerbMobAlert:COMBAT_LOG_EVENT_UNFILTERED(event, a, b, c, d, sourceName)
- self:ProcessMob(sourceName, event)
-end
-
-function BartrubyHerbMobAlert:ProcessMob(name, event)
- if (HERBMOBS[name] and (GetTime() > self.lastAlert)) then
-  UIErrorsFrame:AddMessage(name .. " Spawned!")
+ if (HERBMOBS[npc_id] and (GetTime() > self.lastAlert)) then
+  UIErrorsFrame:AddMessage((UnitName(unit)) .. " Spawned!")
   PlaySoundFile(LSM:Fetch("sound", self.db.profile.alertSound), "MASTER")
   self.lastAlert = GetTime() + self.db.profile.alertWait
  end
