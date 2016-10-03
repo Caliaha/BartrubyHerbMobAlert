@@ -1,12 +1,12 @@
 BartrubyHerbMobAlert = LibStub("AceAddon-3.0"):NewAddon("BartrubyHerbMobAlert", "AceConsole-3.0", "AceEvent-3.0")
 
+local L = LibStub("AceLocale-3.0"):GetLocale("BartrubyHerbMobAlert")
 local LSM = LibStub("LibSharedMedia-3.0")
 LSM:Register("sound", "HerbAlert", [[Interface\Addons\BartrubyHerbMobAlert\alert.ogg]])
 
 local HERBMOBS = { }
-HERBMOBS["Withered Hungerer"] = true
-HERBMOBS["Nightmare Creeper"] = true
-HERBMOBS["Frenzied Fox"] = true -- Only with friendly nameplates and probably not even then
+HERBMOBS[L["Withered Hungerer"]] = true
+HERBMOBS[L["Nightmare Creeper"]] = true
 
 function BartrubyHerbMobAlert:OnInitialize()
  local defaults = {
