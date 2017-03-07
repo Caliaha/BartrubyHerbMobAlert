@@ -7,6 +7,7 @@ local HERBMOBS = { }
 HERBMOBS["98232"] = true -- Withered Hungerer (Azsuna)
 HERBMOBS["98233"] = true -- Withered Hungerer (Suramar)
 HERBMOBS["98234"] = true -- Nightmare Creeper (Val'sharah)
+HERBMOBS["98235"] = true -- Frenzied Fox (Highmountain)  Requires friendly nameplates to be visible
 
 function BartrubyHerbMobAlert:OnInitialize()
  local defaults = {
@@ -36,8 +37,9 @@ end
 
 function BartrubyHerbMobAlert:NAME_PLATE_UNIT_ADDED(event, unit)
  local _, _, _, _, _, npc_id, _ = strsplit("-", UnitGUID(unit))
-
+ 
  if (HERBMOBS[npc_id] and (GetTime() > self.lastAlert)) then
+  --if (UnitIsTapDenied(unit)) then self:Print("UNIT IS TAP DENIED:",unit) end
   if (self.db.profile.customFont) then
    self:CustomMessage((UnitName(unit)) .. " Spawned!")
   else  
