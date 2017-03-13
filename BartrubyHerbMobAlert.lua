@@ -28,6 +28,11 @@ function BartrubyHerbMobAlert:OnInitialize()
  self:RegisterChatCommand("herbalert","HandleIt")
  
  self.lastAlert = 0
+ 
+ self.fox = false
+ self.showAllNameplates = nil
+ self.showFriendlyNameplates = nil
+ self.showFriendlyNPCNameplates = nil
 end
 
 function BartrubyHerbMobAlert:OnEnable()
@@ -90,12 +95,6 @@ function BartrubyHerbMobAlert:CustomMessage(message)
  self.message.timeStart = GetTime()
  self.message:Show()
  self.message:SetAlpha(1)
- 
- self.fox = false
- self.showAllNameplates = nil
- self.showFriendlyNameplates = nil
- self.showFriendlyNPCNameplates = nil
- 
 end
 
 function BartrubyHerbMobAlert:HandleIt(input)
