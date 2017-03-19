@@ -54,6 +54,7 @@ function BartrubyHerbMobAlert:NAME_PLATE_UNIT_ADDED(event, unit)
  local _, _, _, _, _, npc_id, _ = strsplit("-", UnitGUID(unit))
  
  if (HERBMOBS[npc_id] and (GetTime() > self.lastAlert)) then
+  if (UnitIsTapDenied(unit)) then return end
   if (self.db.profile.customFont) then
    self:CustomMessage((UnitName(unit)) .. " Spawned!")
   else  
