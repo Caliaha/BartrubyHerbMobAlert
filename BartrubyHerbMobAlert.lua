@@ -107,6 +107,9 @@ function BartrubyHerbMobAlert:HandleIt(input)
   self:ToggleFox()
   return
  end
+ 
+ InterfaceOptionsFrame_OpenToCategory("BartrubyHerbMobAlert")
+ InterfaceOptionsFrame_OpenToCategory("BartrubyHerbMobAlert")
 end
 
 function BartrubyHerbMobAlert:ToggleFox()
@@ -183,6 +186,19 @@ function BartrubyHerbMobAlert:GenerateOptions()
 	order = 4.2,
     min = 8, max = 64, step = 1,
    },
+   testAlert = {
+    name = "Test Alert",
+	type = "execute",
+	order = 4.3,
+	func = function()
+            if (self.db.profile.customFont) then
+             self:CustomMessage("TestAlert Spawned!")
+            else  
+             UIErrorsFrame:AddMessage("TestAlert Spawned!")
+            end
+            PlaySoundFile(LSM:Fetch("sound", self.db.profile.alertSound), "MASTER")
+	       end,
+   },
    foxheader = {
     name = "Fox Options",
 	desc = "All must be toggle on to detect fox",
@@ -195,7 +211,8 @@ function BartrubyHerbMobAlert:GenerateOptions()
 	type = "toggle",
 	order = 5.1,
 	get = function() local v = GetCVar("nameplateShowAll") if (tonumber(v) == 1) then return true else return false end end,
-	set = function(i, v) if (v) then if (InCombatLockdown()) then self:Print("Can't change that CVar while in combat!") return end SetCVar("nameplateShowAll", 1) else SetCVar("nameplateShowAll",0) end end,
+	set = function(i, v) if (InCombatLockdown()) then self:Print("Can't change that CVar while in combat!") return end InterfaceOptionsNamesPanelUnitNameplatesShowAll:Click() end,
+	--SetCVar("nameplateShowAll", 1)
    },
    friendlynpc = {
     name = "Show friendly npc nameplates",
@@ -203,7 +220,7 @@ function BartrubyHerbMobAlert:GenerateOptions()
 	type = "toggle",
 	order = 5.1,
 	get = function() local v = GetCVar("nameplateShowFriendlyNPCs") if (tonumber(v) == 1) then return true else return false end end,
-	set = function(i, v) if (v) then if (InCombatLockdown()) then self:Print("Can't change that CVar while in combat!") return end SetCVar("nameplateShowFriendlyNPCs", 1) else SetCVar("nameplateShowFriendlyNPCs",0) end end,
+	set = function(i, v) if (InCombatLockdown()) then self:Print("Can't change that CVar while in combat!") return end if (v) then SetCVar("nameplateShowFriendlyNPCs", 1) else SetCVar("nameplateShowFriendlyNPCs",0) end end,
    },
    friendlynameplates = {
     name = "Show friendly nameplates (Shift-V equivalent)",
@@ -211,7 +228,8 @@ function BartrubyHerbMobAlert:GenerateOptions()
 	type = "toggle",
 	order = 5.1,
 	get = function() local v = GetCVar("nameplateShowFriends") if (tonumber(v) == 1) then return true else return false end end,
-	set = function(i, v) if (v) then if (InCombatLockdown()) then self:Print("Can't change that CVar while in combat!") return end SetCVar("nameplateShowFriends", 1) else SetCVar("nameplateShowFriends",0) end end,
+	set = function(i, v) if (InCombatLockdown()) then self:Print("Can't change that CVar while in combat!") return end InterfaceOptionsNamesPanelUnitNameplatesFriends:Click() end,
+	--SetCVar("nameplateShowFriends", 1)
    },
   },
  }
