@@ -1,4 +1,4 @@
-## Interface: 70200
+## Interface: 70300
 ## Title: BartrubyHerbMobAlert
 ## Version: @project-version@
 ## Notes: Alerts when herb spawns mob
